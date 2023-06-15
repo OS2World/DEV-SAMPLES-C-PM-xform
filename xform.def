@@ -1,7 +1,8 @@
-NAME  Xform  WINDOWAPI
+;-------------------------------------
+; XFORM.DEF module definition file
+;-------------------------------------
 
-DESCRIPTION 'Transforms - Model transform examples'
+NAME  XFORM  WINDOWAPI
 
-PROTMODE
-HEAPSIZE    32768
-STACKSIZE   16384
+DESCRIPTION '@#OS2World:1.01#@##1## 14 Jun 2023 20:00:00     ARCAOS-507::::::v1.01@@Transforms - Model transform examples'
+

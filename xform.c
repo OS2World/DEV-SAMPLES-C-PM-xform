@@ -22,8 +22,8 @@ PFNWP   pfnwpFrame;
 
 // Local function prototype declarations
 
-MRESULT EXPENTRY ClientWndProc( HWND hwnd ,USHORT msg ,MPARAM mp1 ,MPARAM mp2 );
-MRESULT EXPENTRY FrameSubclassProc( HWND hwnd, USHORT msg, MPARAM mp1, MPARAM mp2);
+MRESULT EXPENTRY ClientWndProc( HWND hwnd ,ULONG msg ,MPARAM mp1 ,MPARAM mp2 );
+MRESULT EXPENTRY FrameSubclassProc( HWND hwnd, ULONG msg, MPARAM mp1, MPARAM mp2);
 
 void DrawBox( HWND hwnd );
 void DrawTransformedBox( HWND hwnd );
@@ -41,7 +41,7 @@ void RotateBox( HWND hwnd );
 //
 //
 // --------------------------------------------------------------------------
-void cdecl main(VOID)
+int main(VOID)
 {
    HMQ hmq;
    HWND hwndclient;
@@ -51,22 +51,22 @@ void cdecl main(VOID)
                            FCF_TASKLIST   | FCF_TITLEBAR      | FCF_SYSMENU |
                            FCF_SIZEBORDER | FCF_MINMAX        | FCF_MENU ;
 
-   hab = WinInitialize( (USHORT)NULL );
+   hab = WinInitialize( (ULONG)NULL );
 
    hmq=WinCreateMsgQueue( hab,0 );
 
 
    WinRegisterClass( hab
-                   , XFORM_CLASSNAME
+                   , (PCSZ) XFORM_CLASSNAME
                    , (PFNWP)ClientWndProc
                    , (ULONG)CS_SIZEREDRAW
-                   , (USHORT)256 );
+                   , (ULONG)256 );
 
    hwndFrame = WinCreateStdWindow( HWND_DESKTOP
                                  ,  0UL
                                  ,  &flCreateFlags
-                                 ,  XFORM_CLASSNAME
-                                 ,  "Xform - Model transform examples"
+                                 ,  (PCSZ) XFORM_CLASSNAME
+                                 ,  (PCSZ) "Xform - Model transform examples"
                                  ,  WS_VISIBLE
                                  ,  (HMODULE)0
                                  ,  ID_PIN
@@ -93,7 +93,7 @@ void cdecl main(VOID)
 //  Client window procedure.
 //
 // --------------------------------------------------------------------------
-MRESULT EXPENTRY ClientWndProc(HWND hwnd, USHORT msg, MPARAM mp1, MPARAM mp2)
+MRESULT EXPENTRY ClientWndProc(HWND hwnd, ULONG msg, MPARAM mp1, MPARAM mp2)
 {
 
    switch (msg)
@@ -128,6 +128,7 @@ MRESULT EXPENTRY ClientWndProc(HWND hwnd, USHORT msg, MPARAM mp1, MPARAM mp2)
        return( WinDefWindowProc( hwnd, msg, mp1, mp2 )) ;
      }
    }
+   return 0;
 }
 
 //--------------------------------------------------------------------------

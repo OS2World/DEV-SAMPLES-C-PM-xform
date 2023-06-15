@@ -1,15 +1,20 @@
-#-----------------
-# TEST1 make file
-#-----------------
+# make makefile
+# 
+# Tools used:
+#  Compile::Resource Compiler
+#  Compile::GNU C
+#  Make: make
+all : xform.exe
 
-xform.exe : xform.obj xform.def xform.res xform.lnk
-     link386 @xform.lnk
-     rc xform.res xform.exe
-     mapsym xform
+xform.exe : xform.obj xform.def xform.res 
+	gcc -Zomf xform.obj xform.def xform.res -o xform.exe
+	wrc xform.res
 
 xform.obj : xform.c xform.h
-     icc /O /Kb /Mp /C /Sm /Ss xform.c
+	gcc -Wall -Zomf -c -O2 xform.c -o xform.obj
 
-xform.res : xform.rc xform.h
-     rc -r xform.rc
-
+xform.res : xform.rc 
+	wrc -r xform.rc
+
+clean :
+	rm -rf *exe *res *obj *lib

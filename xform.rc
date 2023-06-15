@@ -1,3 +1,7 @@
+/*----------------------------------
+   XFORM.RC resource script file
+  ----------------------------------*/
+
 #define INCL_WIN
 #include <os2.h>
 #include "xform.h"
